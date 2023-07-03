@@ -1,15 +1,8 @@
-# Establecer la imagen base de Apache con PHP
-FROM php:7.4-apache
+# Utiliza la imagen base de NGINX
+FROM nginx
 
-# Copiar el archivo index.php al directorio de trabajo en el contenedor
-WORKDIR /usr/src/app
+# Copia el archivo "index.html" al directorio raíz de NGINX dentro del contenedor
+COPY . /usr/share/nginx/html
 
-COPY . /usr/src/app
-
-RUN chmod -R 777 /usr/src/app/upload
-
-# Exponer el puerto 80 para el tráfico web
-EXPOSE $PORT
-
-# Comando para iniciar Apache en segundo plano cuando se inicie el contenedor
-CMD ["apache2-foreground"]
+# Expone el puerto 80 para permitir el acceso al contenedor desde el host
+EXPOSE 80
